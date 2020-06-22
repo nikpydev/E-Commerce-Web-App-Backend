@@ -33,10 +33,9 @@ exports.createOrder = (req, res) => {
         }
         if (!savedOrder) {
             return res.status(404).json({
-                message: "Order couldn't be saved."
+                error: "Order couldn't be saved."
             })
         }
-        res.status(200).json(savedOrder)
     })
 }
 

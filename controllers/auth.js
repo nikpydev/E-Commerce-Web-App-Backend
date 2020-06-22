@@ -15,7 +15,7 @@ exports.register = (req, res) => {
     user.save((err, user) => {
         if (err) {
             return res.status(400).json({
-                error: "Not able to save user in DB."
+                error: err.body
             })
         }
         res.json({
@@ -84,6 +84,7 @@ exports.isSignedIn = expressJwt({
 // Custom middleware
 exports.isAuthenticated = (req, res, next) => {
     let checker = req.profile && req.auth && req.profile._id == req.auth._id
+    console.log("req.auth: ", req.auth)
     if (!checker) {
         return res.status(403).json({
             error: "ACCESS DENIED!"

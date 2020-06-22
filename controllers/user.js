@@ -61,7 +61,7 @@ exports.updateUser = (req, res) => {
 
 exports.userPurchaseList = (req, res) => {
     Order.find({user: req.profile._id})
-        .populate("user", "_id, name")
+        .populate("user", "_id, fName")
         .exec((err, order) => {
             if (err) {
                 res.status(400).json({

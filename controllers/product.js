@@ -174,12 +174,12 @@ exports.getAllProducts = (req, res) => {
         .exec((err, foundProducts) => {
             if (err) {
                 return res.status(400).json({
-                    error: err.body
+                    error: err
                 })
             }
             if (!foundProducts) {
                 return res.status(404).json({
-                    message: "No products available."
+                    error: "No products available."
                 })
             }
             res.status(200).json({
@@ -219,17 +219,14 @@ exports.updateStock = (req, res, next) => {
     Product.bulkWrite(myOperations, {}, (err, updatedProducts) => {
         if (err) {
             return res.status(400).json({
-                message: "Bulk operation failed.",
-                error: err.body
+                error: "Bulk operation failed"
             })
         }
         if (!updatedProducts) {
-            return res.status(404).json({
-                message: "Nothing updated."
+            return res.json({
+                error: "Nothing updated."
             })
         }
-        res.status(200).json({
-            updatedProducts
-        })
+        next()
     })
 }
