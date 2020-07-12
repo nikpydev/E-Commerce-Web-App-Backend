@@ -54,7 +54,7 @@ exports.createProduct = (req, res) => {
         if (file.photo) {
             if (file.photo.size > 3000000) {
                 return res.status(400).json({
-                    error: "Maximum file size allowed is 3Mb."
+                    error: "Maximum file size allowed is 3MB."
                 })
             }
             // If the file being uploaded is not larger than 3Mb only then we'll add it to the 'Product'
